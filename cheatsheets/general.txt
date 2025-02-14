@@ -1,0 +1,45 @@
+# Open current dir in file manager
+xdg-open .
+
+# Open PDF file from commmand line
+xdg-open <filename.pdf>
+
+# Find patterns inside files in a directory
+grep -rE "pattern1|pattern2" /path/to/dir
+
+# Send HTTP/1.1 packets with nc
+nc -n -C <TARGET-IP> <PORT>
+GET /file.php. HTTP/1.1
+Host: <HOSTNAME/IP>
+
+# Show services running in linux machine
+netstat -nlpt
+netstat -nlptu
+
+# Show services running in windows machine
+netstat -ano
+
+# Check SSL certificate metadata
+openssl s_client -connect <TARGET-IP>:<PORT>
+
+# Generate hashed password in /etc/shadow format
+openssl passwd -1 -salt MYSALT MYPASSWORD
+
+# Upgrade to semi interactive shell
+python -c 'import pty; pty.spawn("/bin/bash")'
+
+# To run commands like vim, nano, htop, clear in reverse shell
+export TERM=xterm
+
+# Upgrade to interactive shell
+# To restore the terminal type "reset"
+Ctrl+Z
+stty raw -echo
+fg
+
+# Send file via netcat
+On receiver: nc -nlvp 4444 > received_file
+On sender: nc <RECEIVER-IP> 4444 < file_to_send
+
+# Intercepts and records the dynamic library calls during program execution
+ltrace <PROGRAM>

@@ -1,2 +1,2 @@
-# hack_utils
-Useful hacking scripts that I use regularly.
+# Hack Utils
+Useful pentesting scripts and commands.

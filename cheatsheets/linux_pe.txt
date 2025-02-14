@@ -1,0 +1,34 @@
+##########################################
+# LINUX PRIVILEGE ESCALATION CHEAT SHEET #
+##########################################
+
+# Kernel version
+uname -a
+
+# Available sudo commands
+sudo -l
+
+# Files with SUID or SGID bits set
+find / -type f -perm -04000 -ls 2>/dev/null
+
+# Files with capabilities enabled
+getcap -r / 2> /dev/null
+
+# Cronjobs
+cat /etc/crontab
+
+# Writable folders
+find / -writable 2>/dev/null
+
+# Writable folders inside path
+echo $PATH | tr ':' '\n' | while read dir; do [ -w "$dir" ] && echo "$dir"; done
+
+# Check NFS
+# (check if any share has "no_root_squash" flag enabled)
+cat /etc/exports
+
+# Check mountable shares
+showmount -e <TARGET_IP>
+
+# GTFOBins 
+https://gtfobins.github.io/ 

@@ -1,0 +1,11 @@
+# Note: filter/hide parameters (e.g. filter, fw, fl, hw, hl) need to be adjusted for each case
+
+# Subdomain brute force
+WFUZZ: wfuzz -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -H "Host: FUZZ.example.com" -u "http://example.com" -t 100  --filter "lines != 0 or words != 65 or chars != 0"
+FFUF: ffuf -c -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -H "Host: FUZZ.example.com" -u http://example.com -fw 125 -t 100
+
+# Hidden URL parameters brute force
+wfuzz -c -w /usr/share/wordlists/seclists/Discovery/Web-Content/burp-parameter-names.txt -u "http://example.com/test?FUZZ=value" --filter "lines != 74 or words != 165 or chars != 3628"
+
+# Searching URL parameters in source code
+curl -s -L 'http://example.com/' | grep -oE "[^\s\'\"]*[\?\&][A-Za-z0-9\.\_\~\-]+=[^\s\'\"]*" | sort | uniq

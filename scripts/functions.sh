@@ -118,9 +118,7 @@ top_uptscan () {
         
         IP=$1
         
-        if [ ! -d "nmap-$IP" ]; then
-            mkdir nmap-$IP
-        fi
+        mkdir -p nmap-$IP
         
         if [ -z $2 ]; then
             PORTS_NUM=100

@@ -5,6 +5,9 @@ ssh-keygen -t rsa -b 4096 -C "YOUR_EMAIL@example.com"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/key
 
+# SSH clone
+git clone git@github.com:<USERNAME>/<REPOSITORY_NAME>.git
+
 # Checkout current branch
 git checkout BRANCH_NAME
 

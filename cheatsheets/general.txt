@@ -18,6 +18,7 @@ netstat -nlptu
 
 # Show services running in windows machine
 netstat -ano
+netstat -p <PROTOCOL>
 
 # Check SSL certificate metadata
 openssl s_client -connect <TARGET-IP>:<PORT>
@@ -43,3 +44,6 @@ On sender: nc <RECEIVER-IP> 4444 < file_to_send
 
 # Intercepts and records the dynamic library calls during program execution
 ltrace <PROGRAM>
+
+# Show libs used in executable file
+ldd <PROGRAM>

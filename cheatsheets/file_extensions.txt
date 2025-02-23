@@ -1,0 +1,14 @@
+# Some interesting file extensions to use when doing dir brute
+
+Images: jpg,jpeg,png,gif,bmp,svg,ico
+Videos: mp4,avi,mov
+Audio: mp3,wav
+Log files: log,txt
+Compressed files: zip,tar,gz,7z,rar
+Backup files: bak,backup,bkp
+Database and data files: sql,db,sqlite,mdb,csv,xlsx,xls,xml
+Configuration files: conf,ini,env
+Web Content Extensions: html,htm,php,php3,php4,php5,phtml,asp,aspx,ashx,jsp,jspx
+Static Content Extensions: js,css
+
+All: jpg,jpeg,png,gif,bmp,svg,ico,mp4,avi,mov,mp3,wav,log,txt,zip,tar,gz,7z,rar,bak,backup,bkp,sql,db,sqlite,mdb,csv,xlsx,xls,xml,conf,ini,env,html,htm,php,php3,php4,php5,phtml,asp,aspx,ashx,jsp,jspx,js,css

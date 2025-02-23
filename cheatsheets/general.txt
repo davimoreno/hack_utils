@@ -53,3 +53,10 @@ strace <PROGRAM>
 
 # Show shared libs required by program
 ldd <PROGRAM>
+
+# DNS subdomain brute force
+for name in $(subdomain_list.txt);do host $name.example.com;done | grep -v "NXDOMAIN"
+
+# Reverse DNS search
+for ip in $(seq 224 239);do host -t ptr 37.59.174.$ip;done
+

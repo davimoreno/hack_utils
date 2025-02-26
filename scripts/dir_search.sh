@@ -13,7 +13,7 @@
 # - Name of the output file to save results 
 # Optionally, the user can also provide file extensions, session cookies, and a proxy.  
 #
-# After execution, the obtained results are saved in "./gobuster-<TARGET_NAME>/<OUTPUT_FILE>"
+# After execution, the obtained results are saved in "./gobuster_<TARGET_NAME>/<OUTPUT_FILENAME>"
 #
 # author: @davimoreno
 #
@@ -21,21 +21,25 @@
 ############# PARAMETERS ########################
 TARGET="http://businesscorp.com.br"             # Target URL (e.g. "http://test.com")
 WORDLIST="/usr/share/dirb/wordlists/small.txt"  # Path to wordlist
-OUTPUT_FILE="SEARCH-DIR.gobuster"               # Output file name
+OUTPUT_FILENAME="SEARCH_DIR.gobuster"           # Output filename
 EXTENSIONS=""                                   # Entensions separated by comma (e.g. "php,js,txt,cgi,json,html") 
 COOKIES=""                                      # HTTP Cookies (e.g. "session=123456; token=abcdef")
 PROXY=""                                        # Used Proxy (e.g. "http://127.0.0.1:8080")
 #################################################
 
 # Extract domain name from given URL
-HOST=$(echo "$TARGET" | sed 's|^https\?://||')
+HOST=$(echo "$TARGET" | sed -E 's|https?://([^/:]+).*|\1|')
 
 # Create output directory if it doesn't exist already
-DIR="gobuster-$HOST"
+DIR="gobuster_$HOST"
 mkdir -p "$DIR"
 
 # Get current date and time in UTC format
-DATE_TIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+DATETIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+# Append timestamp to output filename to make it unique
+TIMESTAMP=$(echo $DATETIME | sed 's/[-: a-zA-Z]//g')
+OUTPUT_FILE="${TIMESTAMP}_${OUTPUT_FILENAME}"
 
 # Construct gobuster args string based on optional parameters
 # By default I'm always using the following args:
@@ -67,7 +71,7 @@ trap "rm -f $TEMP_HEADER_FILE $TEMP_OUTPUT_FILE" EXIT
 
 # Create header of output file with information about current run
 echo -e "===============================================================" > $TEMP_HEADER_FILE
-echo -e "Date time  : $DATE_TIME" >> $TEMP_HEADER_FILE
+echo -e "Datetime   : $DATETIME" >> $TEMP_HEADER_FILE
 echo -e "Target     : $TARGET" >> $TEMP_HEADER_FILE
 echo -e "Wordlist   : $WORDLIST" >> $TEMP_HEADER_FILE
 echo -e "Extensions : $EXTENSIONS" >> $TEMP_HEADER_FILE
